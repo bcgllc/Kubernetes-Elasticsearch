@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: es
+  labels:
+    app: kibana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: docker.elastic.co/kibana/kibana:6.2.3
+        ports:
+          - containerPort: 5601
+            name: kibana
+        volumeMounts:
+          - name:  kibana-persistent-storage
+            mountPath: /usr/share/kibana/data
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch:9200
+      volumes:
+        - name: kibana-persistent-storage
+          persistentVolumeClaim:
+            claimName: kibana-pv-claim
