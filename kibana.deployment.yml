@@ -15,23 +15,6 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: kibana-pv-claim
-  namespace: es
-  labels:
-    app: kibana
-    zone: sandbox
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 0.5Gi
-
----
-  
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -60,5 +43,5 @@ spec:
             value: http://elasticsearch:9200
       volumes:
         - name: kibana-persistent-storage
-          persistentVolumeClaim:
-            claimName: kibana-pv-claim
+          hostPath:
+            path: /Users/jonathanburris/k8s/kibana

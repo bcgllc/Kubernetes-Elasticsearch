@@ -15,23 +15,6 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: es-pv-claim
-  namespace: es
-  labels:
-    app: elasticsearch
-    zone: sandbox
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
----
-
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -57,5 +40,5 @@ spec:
             mountPath: /usr/share/elasticsearch/data
       volumes:
         - name: elasticsearch-persistent-storage
-          persistentVolumeClaim:
-            claimName: es-pv-claim
+          hostPath:
+            path: /Users/jonathanburris/k8s/elasticsearch
