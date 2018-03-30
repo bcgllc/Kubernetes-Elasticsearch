@@ -36,12 +36,12 @@ spec:
           - containerPort: 5601
             name: kibana
         volumeMounts:
-          - name:  kibana-persistent-storage
+          - name:  kibana
             mountPath: /usr/share/kibana/data
         env:
           - name: ELASTICSEARCH_URL
             value: http://elasticsearch:9200
       volumes:
-        - name: kibana-persistent-storage
+        - name: kibana
           hostPath:
-            path: /Users/jonathanburris/k8s/kibana
+            path: /tmp/k8s/kibana

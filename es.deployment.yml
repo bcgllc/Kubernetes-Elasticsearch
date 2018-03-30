@@ -36,9 +36,9 @@ spec:
           - containerPort: 9200
             name: elasticsearch
         volumeMounts:
-          - name:  elasticsearch-persistent-storage
+          - name:  elasticsearch
             mountPath: /usr/share/elasticsearch/data
       volumes:
-        - name: elasticsearch-persistent-storage
+        - name: elasticsearch
           hostPath:
-            path: /Users/jonathanburris/k8s/elasticsearch
+            path: /tmp/k8s/elasticsearch
